@@ -4,11 +4,11 @@
 
 /* 
 sensors to be used : 
-NO2 : NO2 Sensor --
-VOC : VOC Sensor --
-Soil pH --
-Soil Moisture --
-DHT Sensor
+NO2 : NO2 Sensor  -- analog
+VOC : VOC Sensor -- analog
+Soil pH : pH sensor -- analog sensor
+Soil Moisture : soil moisture sensor -- 
+Temperature and Humidity : DHT Sensor
 */
 
 #define NUM_PINS 5
@@ -22,22 +22,22 @@ DHT Sensor
 
 // Array to hold the defined pin numbers
 const int pins[NUM_PINS] = {
-  VOCpin, 
-  NO2pin, 
-  PHpin, 
-  Moistpin, 
-  DHTpin
-};
+                                VOCpin, 
+                                NO2pin, 
+                                PHpin, 
+                                Moistpin, 
+                                DHTpin
+                           };
 
 
-const char *sensor_names[NUM_PINS + 1] = {
-  "VOC",
-   "NO2",
-   "pH", 
-   "Moisture", 
-   "Temperaure", 
-   "Humidity"
-  };
+const char *sensor_names[] = {
+                                "VOC",
+                                "NO2",
+                                "pH", 
+                                "Moisture",
+                               "Temperaure", 
+                               "Humidity"
+                            };
 
 
 // Function to set all pins to output and pulled down
@@ -56,7 +56,12 @@ void setup() {
 
 void loop() {
     
-    Serial.print();
+    for(int i = 0; i < NUM_PINS; i++){
+      Serial.print(sensor_names[i]);
+      Serial.print(" + ");
+      Serial.print(analogRead(pins[i]));
+      Serial.println();
+    }
 
 }
 
