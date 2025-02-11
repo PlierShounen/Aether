@@ -1,5 +1,7 @@
 #include <Arduino.h>
 #include <DHT.h>
+#include <Adafruit_Sensor.h>
+#include <DHT_U.h>
 
 
 /* 
@@ -19,6 +21,39 @@ Temperature and Humidity : DHT Sensor
 #define Moistpin 4
 #define DHTpin 5
 
+#define DHTTYPE 11
+
+
+
+void dhtData(){
+DHT_Unified dht(DHTpin, DHTTYPE);
+dht.begin();
+sensors_event_t event;
+Serial.print(event.temperature);
+Serial.println(F("°C"));
+Serial.print(event.relative_humidity);
+Serial.println(F(" %"));
+}
+
+void vocData(){
+  float data = analogRead(VOCpin);
+  Serial.println(data);
+}
+
+void no2Data(){
+  float data = analogRead(NO2pin);
+  Serial.println(data);
+}
+
+void phData(){
+  float data = analogRead(PHpin);
+  Serial.println(data);
+}
+
+void moistData(){
+  float data = analogRead(Moistpin);
+  Serial.println(data);
+}
 
 // Array to hold the defined pin numbers
 const int pins[NUM_PINS] = {
@@ -29,15 +64,6 @@ const int pins[NUM_PINS] = {
                                 DHTpin
                            };
 
-
-const char *sensor_names[] = {
-                                "VOC",
-                                "NO2",
-                                "pH", 
-                                "Moisture",
-                               "Temperaure", 
-                               "Humidity"
-                            };
 
 
 // Function to set all pins to output and pulled down
@@ -52,16 +78,19 @@ void setAll(int mode){
 void setup() {
   setAll(INPUT);  
   Serial.begin(9600);
+  
 }
 
 void loop() {
+
+
     
-    for(int i = 0; i < NUM_PINS; i++){
+    /*for(int i = 0; i < NUM_PINS; i++){
       Serial.print(sensor_names[i]);
       Serial.print(" + ");
       Serial.print(analogRead(pins[i]));
       Serial.println();
-    }
+    }*/
 
 }
 
