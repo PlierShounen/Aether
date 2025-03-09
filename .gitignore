@@ -3,3 +3,5 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+src/python_backend/*.json
+src/python_backend/project-aether-6c98f-firebase-adminsdk-fbsvc-bb5457a533.json

@@ -85,12 +85,7 @@ void loop() {
 
 
     
-    /*for(int i = 0; i < NUM_PINS; i++){
-      Serial.print(sensor_names[i]);
-      Serial.print(" + ");
-      Serial.print(analogRead(pins[i]));
-      Serial.println();
-    }*/
+   
 
 }
 
