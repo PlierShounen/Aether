@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <h1>🌍 Wildlife Research Dashboard</h1>
+        <nav>
+            <ul>
+                <li><button class="navigate-btn" data-target="observations.html">Observations</button></li>
+                <li><button class="navigate-btn" data-target="reviews.html">Reviews</button></li>
+                <li><button id="logoutBtn" class="navigate-btn">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Wildlife Fun Fact Section -->
+    <section class="wildlife-intro">
+        <h2>Did You Know?</h2>
+        <div class="fact-box">
+            <img id="factImage" src="pangolin.jpg" alt="Wildlife Fact">
+            <p id="factText">🔹 Pangolins are the only mammals covered in scales.</p>
+            <button id="randomFact" class="btn">🔄 New Fact</button>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+        <h2>User Reviews</h2>
+        <div class="review-box">
+            <p class="review" id="reviewText">🌟 This site is great for wildlife research!</p>
+            <button id="prevReview" class="btn">⬅️ Previous</button>
+            <button id="nextReview" class="btn">➡️ Next</button>
+        </div>
+    </section>
+
+    <!-- Image Upload Section -->
+    <section class="image-upload">
+        <h2>Upload Your Research Photo</h2>
+        <input type="file" id="uploadPhoto" accept="image/*">
+        <img id="reviewAvatar" src="default-avatar.png" alt="User Avatar">
+    </section>
+
+    <!-- Wildlife Parks Dropdown -->
+    <section class="parks-section">
+        <h2>Select a Wildlife Park</h2>
+        <select id="wildlifeParks">
+            <option value="">Select a park...</option>
+        </select>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Wildlife Research. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

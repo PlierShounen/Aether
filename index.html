@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</head>
+<body>
+    <header>
+        <h1>🌿 Wildlife Tracker</h1>
+        <button id="logoutButton" class="btn">Logout</button>
+    </header>
+
+    <!-- Park Selection -->
+    <section class="parks-section">
+        <h2>Select a National Park</h2>
+        <select id="wildlifeParks">
+            <option value="">-- Select --</option>
+            <option value="JimCorbett">Jim Corbett National Park</option>
+            <option value="Kaziranga">Kaziranga National Park</option>
+            <option value="Ranthambore">Ranthambore National Park</option>
+        </select>
+    </section>
+
+    <!-- Map Container -->
+    <section id="mapContainer">
+        <div id="map"></div>
+    </section>
+
+    <!-- User Reviews -->
+    <section class="reviews">
+        <h2>User Reviews</h2>
+        <p id="reviewText">"A great experience at the wildlife park!"</p>
+        <button id="changeReview" class="btn">Next Review</button>
+
+        <input type="file" id="uploadPhoto">
+        <img id="reviewAvatar" src="default-avatar.png" alt="User Avatar">
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Wildlife Tracker</p>
+    </footer>
+</body>
+</html>
+
