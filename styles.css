@@ -23,15 +23,22 @@ header h1 {
     margin: 0;
 }
 
-/* Navigation */
+/* Navigation Bar */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
 }
 
 nav ul li {
-    margin-right: 15px;
+    margin: 0 10px;
 }
 
 nav ul li button {
@@ -195,6 +202,23 @@ nav ul li button:hover {
     width: 100%;
 }
 
+/* Wildlife Map Section */
+#mapContainer {
+    background-color: white;
+    padding: 20px;
+    margin: 30px auto;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: #ddd;
+    border-radius: 10px;
+}
+
 /* Footer */
 footer {
     background: #2c3e50;
@@ -223,6 +247,7 @@ footer {
         margin: 5px 0;
     }
 }
+
 
 
 
