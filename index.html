@@ -49,21 +49,41 @@
             </select>
         </section>
 
-        <!-- Map Container -->
-        <section id="mapContainer">
-            <div id="map"></div>
+        <!-- Environmental Data Section -->
+        <section class="environmental-data">
+            <h2>Current Environmental Conditions</h2>
+            <div class="data-grid">
+                <div class="data-box"><strong>🌡 Temperature:</strong> <span id="tempData">--</span> °C</div>
+                <div class="data-box"><strong>💧 Humidity:</strong> <span id="humidityData">--</span> %</div>
+                <div class="data-box"><strong>🌬 Air Quality:</strong> <span id="airQualityData">--</span> AQI</div>
+                <div class="data-box"><strong>🌊 Water Level:</strong> <span id="waterLevelData">--</span> m</div>
+                <div class="data-box"><strong>👀 Motion Detection:</strong> <span id="motionData">--</span></div>
+                <div class="data-box"><strong>🌱 Soil Water Content:</strong> <span id="soilData">--</span>%</div>
+                <div class="data-box"><strong>💡 Light Intensity:</strong> <span id="lightData">--</span> lux</div>
+            </div>
+        </section>
+
+        <!-- Wildlife Fun Fact Section -->
+        <section class="wildlife-intro">
+            <h2>Did You Know?</h2>
+            <div class="fact-box">
+                <img id="factImage" src="pangolin.jpg" alt="Wildlife Fact">
+                <p id="factText">🔹 Pangolins are the only mammals covered in scales.</p>
+                <button id="randomFact" class="btn">🔄 New Fact</button>
+            </div>
         </section>
 
         <!-- User Reviews -->
         <section class="reviews">
             <h2>User Reviews</h2>
-            <p id="reviewText">"A great experience at the wildlife park!"</p>
-            <button id="changeReview" class="btn">Next Review</button>
-
-            <input type="file" id="uploadPhoto">
-            <img id="reviewAvatar" src="default-avatar.png" alt="User Avatar">
+            <div class="review-box">
+                <p class="review" id="reviewText">🌟 This site is great for wildlife research!</p>
+                <button id="prevReview" class="btn">⬅️ Previous</button>
+                <button id="nextReview" class="btn">➡️ Next</button>
+            </div>
         </section>
 
+        <!-- Footer -->
         <footer>
             <p>&copy; 2025 Wildlife Tracker</p>
         </footer>
@@ -73,5 +93,6 @@
     <script defer src="script.js"></script>
 </body>
 </html>
+
 
 
