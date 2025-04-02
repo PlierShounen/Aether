@@ -1,43 +1,71 @@
-function initMap() {
-    console.log("Google Maps Loaded Successfully!");
-
-    var map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 20.5937, lng: 78.9629 }, // Default location (India)
-        zoom: 5
-    });
-
-    var parkCoordinates = {
-        "JimCorbett": { lat: 29.5300, lng: 78.7740 },
-        "Kaziranga": { lat: 26.5775, lng: 93.1711 },
-        "Ranthambore": { lat: 26.0173, lng: 76.5026 }
-    };
-
-    var parksDropdown = document.getElementById("wildlifeParks");
-    if (parksDropdown) {
-        parksDropdown.addEventListener("change", function () {
-            var selectedPark = parksDropdown.value;
-            if (parkCoordinates[selectedPark]) {
-                map.setCenter(parkCoordinates[selectedPark]);
-                map.setZoom(10);
-            }
-        });
-    }
-}
-
-// Ensure DOM is loaded before running script
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Script Loaded Successfully!");
 
-    // Logout Button Functionality
-    var logoutButton = document.getElementById("logoutButton");
-    if (logoutButton) {
-        logoutButton.addEventListener("click", function () {
-            alert("Logged out successfully!");
-            window.location.href = "home.html";
-        });
+    // ==================== LOGIN & SIGNUP FUNCTIONALITY ==================== //
+    const authSection = document.getElementById("authSection");
+    const dashboard = document.getElementById("dashboard");
+
+    const loginForm = document.getElementById("loginForm");
+    const signupForm = document.getElementById("signupForm");
+
+    const showSignup = document.getElementById("showSignup");
+    const showLogin = document.getElementById("showLogin");
+
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    const logoutButton = document.getElementById("logoutButton");
+
+    // Switch between Login & Signup
+    showSignup.addEventListener("click", function () {
+        loginForm.classList.add("hidden");
+        signupForm.classList.remove("hidden");
+    });
+
+    showLogin.addEventListener("click", function () {
+        signupForm.classList.add("hidden");
+        loginForm.classList.remove("hidden");
+    });
+
+    // Check if user is already logged in
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+        window.location.href = "home.html"; // Redirect if already logged in
     }
 
-    // Review Section
+    // Login Function
+    loginBtn.addEventListener("click", function () {
+        let email = document.getElementById("loginEmail").value;
+        let password = document.getElementById("loginPassword").value;
+
+        if (email && password) {
+            localStorage.setItem("loggedInUser", email); // Store user session
+            window.location.href = "home.html"; // Redirect to the dashboard
+        } else {
+            alert("Please enter valid credentials!");
+        }
+    });
+
+    // Signup Function
+    signupBtn.addEventListener("click", function () {
+        let name = document.getElementById("signupName").value;
+        let email = document.getElementById("signupEmail").value;
+        let password = document.getElementById("signupPassword").value;
+
+        if (name && email && password) {
+            localStorage.setItem("loggedInUser", email); // Store user session
+            window.location.href = "home.html"; // Redirect to the dashboard
+        } else {
+            alert("Please fill all fields!");
+        }
+    });
+
+    // Logout Function
+    logoutButton.addEventListener("click", function () {
+        localStorage.removeItem("loggedInUser"); // Clear session
+        window.location.href = "index.html"; // Redirect to login
+    });
+
+    // ==================== USER REVIEW SECTION ==================== //
     var reviews = [
         "Amazing experience at Jim Corbett!",
         "Kaziranga has stunning wildlife.",
@@ -45,8 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
     var reviewIndex = 0;
     var reviewText = document.getElementById("reviewText");
-
     var changeReviewButton = document.getElementById("changeReview");
+
     if (changeReviewButton && reviewText) {
         changeReviewButton.addEventListener("click", function () {
             reviewIndex = (reviewIndex + 1) % reviews.length;
@@ -54,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Photo Upload
+    // ==================== PHOTO UPLOAD ==================== //
     var uploadInput = document.getElementById("uploadPhoto");
     var reviewAvatar = document.getElementById("reviewAvatar");
 
@@ -71,5 +99,4 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
-
 
