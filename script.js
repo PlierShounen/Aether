@@ -1,102 +1,62 @@
-document.addEventListener("DOMContentLoaded", function () {
-    console.log("Script Loaded Successfully!");
-
-    // ==================== LOGIN & SIGNUP FUNCTIONALITY ==================== //
-    const authSection = document.getElementById("authSection");
-    const dashboard = document.getElementById("dashboard");
-
-    const loginForm = document.getElementById("loginForm");
-    const signupForm = document.getElementById("signupForm");
-
-    const showSignup = document.getElementById("showSignup");
-    const showLogin = document.getElementById("showLogin");
-
-    const loginBtn = document.getElementById("loginBtn");
-    const signupBtn = document.getElementById("signupBtn");
-    const logoutButton = document.getElementById("logoutButton");
-
-    // Switch between Login & Signup
-    showSignup.addEventListener("click", function () {
-        loginForm.classList.add("hidden");
-        signupForm.classList.remove("hidden");
-    });
-
-    showLogin.addEventListener("click", function () {
-        signupForm.classList.add("hidden");
-        loginForm.classList.remove("hidden");
-    });
-
-    // Check if user is already logged in
-    const loggedInUser = localStorage.getItem("loggedInUser");
-    if (loggedInUser) {
-        window.location.href = "home.html"; // Redirect if already logged in
+document.addEventListener("DOMContentLoaded", () => {
+    // 🌿 Authentication Logic
+    const user = localStorage.getItem("loggedInUser");
+    if (user) {
+        document.getElementById("dashboard").classList.remove("hidden");
+        document.getElementById("authSection").classList.add("hidden");
     }
 
-    // Login Function
-    loginBtn.addEventListener("click", function () {
-        let email = document.getElementById("loginEmail").value;
-        let password = document.getElementById("loginPassword").value;
-
-        if (email && password) {
-            localStorage.setItem("loggedInUser", email); // Store user session
-            window.location.href = "home.html"; // Redirect to the dashboard
-        } else {
-            alert("Please enter valid credentials!");
+    document.getElementById("loginBtn").addEventListener("click", () => {
+        const email = document.getElementById("loginEmail").value;
+        if (email) {
+            localStorage.setItem("loggedInUser", email);
+            location.reload();
         }
     });
 
-    // Signup Function
-    signupBtn.addEventListener("click", function () {
-        let name = document.getElementById("signupName").value;
-        let email = document.getElementById("signupEmail").value;
-        let password = document.getElementById("signupPassword").value;
-
-        if (name && email && password) {
-            localStorage.setItem("loggedInUser", email); // Store user session
-            window.location.href = "home.html"; // Redirect to the dashboard
-        } else {
-            alert("Please fill all fields!");
-        }
+    document.getElementById("logoutButton").addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        location.reload();
     });
 
-    // Logout Function
-    logoutButton.addEventListener("click", function () {
-        localStorage.removeItem("loggedInUser"); // Clear session
-        window.location.href = "index.html"; // Redirect to login
-    });
-
-    // ==================== USER REVIEW SECTION ==================== //
-    var reviews = [
-        "Amazing experience at Jim Corbett!",
-        "Kaziranga has stunning wildlife.",
-        "Ranthambore is a must-visit."
+    // 🌿 Random Wildlife Facts
+    const facts = [
+        { text: "Cheetahs can accelerate from 0 to 100 km/h in just 3 seconds.", image: "cheetah.jpg" },
+        { text: "The Amazon Rainforest produces 20% of the world's oxygen.", image: "amazon.jpg" },
+        { text: "Elephants can recognize themselves in mirrors!", image: "elephant.jpg" }
     ];
-    var reviewIndex = 0;
-    var reviewText = document.getElementById("reviewText");
-    var changeReviewButton = document.getElementById("changeReview");
+    document.getElementById("randomFact").addEventListener("click", () => {
+        let randomFact = facts[Math.floor(Math.random() * facts.length)];
+        document.getElementById("factText").innerText = "🔹 " + randomFact.text;
+        document.getElementById("factImage").src = randomFact.image;
+    });
 
-    if (changeReviewButton && reviewText) {
-        changeReviewButton.addEventListener("click", function () {
-            reviewIndex = (reviewIndex + 1) % reviews.length;
-            reviewText.textContent = reviews[reviewIndex];
-        });
+    // 🌿 Review Navigation
+    const reviews = [
+        "Amazing research tool for wildlife data!",
+        "Very helpful for understanding environmental changes.",
+        "The park selection feature is great for tracking conditions."
+    ];
+    let reviewIndex = 0;
+    document.getElementById("nextReview").addEventListener("click", () => {
+        reviewIndex = (reviewIndex + 1) % reviews.length;
+        document.getElementById("reviewText").innerText = "🌟 " + reviews[reviewIndex];
+    });
+    document.getElementById("prevReview").addEventListener("click", () => {
+        reviewIndex = (reviewIndex - 1 + reviews.length) % reviews.length;
+        document.getElementById("reviewText").innerText = "🌟 " + reviews[reviewIndex];
+    });
+
+    // 🌿 Simulated Environmental Data
+    function generateData() {
+        document.getElementById("tempData").textContent = (20 + Math.random() * 15).toFixed(1);
+        document.getElementById("humidityData").textContent = (40 + Math.random() * 40).toFixed(1);
+        document.getElementById("airQualityData").textContent = Math.floor(50 + Math.random() * 100);
+        document.getElementById("waterLevelData").textContent = (0.5 + Math.random() * 2).toFixed(2);
+        document.getElementById("motionData").textContent = Math.random() > 0.5 ? "Detected" : "No Motion";
+        document.getElementById("soilData").textContent = (20 + Math.random() * 40).toFixed(1);
+        document.getElementById("lightData").textContent = Math.floor(300 + Math.random() * 1000);
     }
-
-    // ==================== PHOTO UPLOAD ==================== //
-    var uploadInput = document.getElementById("uploadPhoto");
-    var reviewAvatar = document.getElementById("reviewAvatar");
-
-    if (uploadInput && reviewAvatar) {
-        uploadInput.addEventListener("change", function (event) {
-            var file = event.target.files[0];
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    reviewAvatar.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
+    setInterval(generateData, 5000);
+    generateData();
 });
-
