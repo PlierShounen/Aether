@@ -11,7 +11,7 @@
 
     <!-- Header & Navigation -->
     <header>
-        <h1>🌍 Wildlife Research Dashboard</h1>
+        <h1 id="welcomeMessage">🌍 Wildlife Research Dashboard</h1>
         <nav>
             <ul>
                 <li><button class="navigate-btn" data-target="observations.html">Observations</button></li>
@@ -60,6 +60,24 @@
     <footer>
         <p>© 2025 Wildlife Research. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Ensure the user is logged in, otherwise redirect to index.html
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = localStorage.getItem("loggedInUser");
+            if (!user) {
+                window.location.href = "index.html";
+            } else {
+                document.getElementById("welcomeMessage").textContent = `🌍 Welcome, ${user}!`;
+            }
+
+            // Logout function
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+                localStorage.removeItem("loggedInUser");
+                window.location.href = "index.html";
+            });
+        });
+    </script>
 
 </body>
 </html>
