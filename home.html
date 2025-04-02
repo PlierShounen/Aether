@@ -56,28 +56,24 @@
         </select>
     </section>
 
+    <!-- Environmental Monitoring -->
+    <section class="monitoring">
+        <h2>Environmental Monitoring</h2>
+        <div class="monitor-grid">
+            <label>Temperature (°C): <input type="text" id="temperature"></label>
+            <label>Humidity (%): <input type="text" id="humidity"></label>
+            <label>Air Quality (AQI): <input type="text" id="airQuality"></label>
+            <label>Water Level (cm): <input type="text" id="waterLevel"></label>
+            <label>Motion Detection: <input type="text" id="motion"></label>
+            <label>Soil Water Content (%): <input type="text" id="soilMoisture"></label>
+            <label>Light Intensity (Lux): <input type="text" id="lightIntensity"></label>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>© 2025 Wildlife Research. All Rights Reserved.</p>
     </footer>
-
-    <script>
-        // Ensure the user is logged in, otherwise redirect to index.html
-        document.addEventListener("DOMContentLoaded", () => {
-            const user = localStorage.getItem("loggedInUser");
-            if (!user) {
-                window.location.href = "index.html";
-            } else {
-                document.getElementById("welcomeMessage").textContent = `🌍 Welcome, ${user}!`;
-            }
-
-            // Logout function
-            document.getElementById("logoutBtn").addEventListener("click", () => {
-                localStorage.removeItem("loggedInUser");
-                window.location.href = "index.html";
-            });
-        });
-    </script>
 
 </body>
 </html>
