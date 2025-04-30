@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("Script loaded successfully!");
 
-    // Toggle Login/Signup
     const loginForm = document.getElementById("loginForm");
     const signupForm = document.getElementById("signupForm");
     const authSection = document.getElementById("authSection");
@@ -17,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
         loginForm.classList.remove("hidden");
     });
 
-    // Login
     document.getElementById("loginBtn")?.addEventListener("click", function () {
         const email = document.getElementById("loginEmail").value;
         const password = document.getElementById("loginPassword").value;
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Signup
     document.getElementById("signupBtn")?.addEventListener("click", function () {
         const name = document.getElementById("signupName").value;
         const email = document.getElementById("signupEmail").value;
@@ -46,32 +43,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Logout
     document.getElementById("logoutButton")?.addEventListener("click", function () {
         dashboard.classList.add("hidden");
         authSection.classList.remove("hidden");
     });
 
-    // Populate Environmental Data (mock)
     function populateEnvironmentalData() {
-        const tempEl = document.getElementById("tempData");
-        const humidityEl = document.getElementById("humidityData");
-        const airEl = document.getElementById("airQualityData");
-        const waterEl = document.getElementById("waterLevelData");
-        const motionEl = document.getElementById("motionData");
-        const soilEl = document.getElementById("soilData");
-        const lightEl = document.getElementById("lightData");
+        const tempData = document.getElementById("tempData");
+        const humidityData = document.getElementById("humidityData");
+        const airQualityData = document.getElementById("airQualityData");
+        const waterLevelData = document.getElementById("waterLevelData");
+        const motionData = document.getElementById("motionData");
+        const soilData = document.getElementById("soilData");
+        const lightData = document.getElementById("lightData");
 
-        if (tempEl) tempEl.textContent = "26.5";
-        if (humidityEl) humidityEl.textContent = "78";
-        if (airEl) airEl.textContent = "42";
-        if (waterEl) waterEl.textContent = "3.1";
-        if (motionEl) motionEl.textContent = "No movement";
-        if (soilEl) soilEl.textContent = "55";
-        if (lightEl) lightEl.textContent = "1200";
+        if (tempData) tempData.textContent = "26.5";
+        if (humidityData) humidityData.textContent = "78";
+        if (airQualityData) airQualityData.textContent = "42";
+        if (waterLevelData) waterLevelData.textContent = "3.1";
+        if (motionData) motionData.textContent = "No movement";
+        if (soilData) soilData.textContent = "55";
+        if (lightData) lightData.textContent = "1200";
     }
 
-    // Wildlife Fun Facts
     const facts = [
         { text: "🔹 Pangolins are the only mammals covered in scales.", image: "pangolin.jpg" },
         { text: "🔹 A group of flamingos is called a 'flamboyance'.", image: "flamingo.jpg" },
@@ -85,17 +79,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const factImage = document.getElementById("factImage");
     const randomFactBtn = document.getElementById("randomFact");
 
-    if (randomFactBtn && factText && factImage) {
-        randomFactBtn.addEventListener("click", function () {
-            const randomIndex = Math.floor(Math.random() * facts.length);
-            const selectedFact = facts[randomIndex];
+    randomFactBtn?.addEventListener("click", function () {
+        let randomIndex = Math.floor(Math.random() * facts.length);
+        const selectedFact = facts[randomIndex];
+        if (factText && factImage) {
             factText.textContent = selectedFact.text;
             factImage.src = selectedFact.image;
             factImage.alt = selectedFact.text;
-        });
-    }
+        }
+    });
 
-    // User Reviews Carousel
     const reviews = [
         "🌟 This site is great for wildlife research!",
         "🦅 Amazing tool for monitoring ecosystems!",
@@ -115,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (reviewText) reviewText.textContent = reviews[reviewIndex];
     });
 
-    // Wildlife Parks Dropdown
     const parksDropdown = document.getElementById("wildlifeParks");
     const parks = [
         "Yellowstone National Park",
@@ -126,12 +118,37 @@ document.addEventListener("DOMContentLoaded", function () {
         "Banff National Park",
         "Yala National Park"
     ];
-    if (parksDropdown) {
-        parks.forEach(park => {
-            let option = document.createElement("option");
-            option.textContent = park;
-            option.value = park;
-            parksDropdown.appendChild(option);
-        });
-    }
+    parks.forEach(park => {
+        let option = document.createElement("option");
+        option.textContent = park;
+        option.value = park;
+        parksDropdown?.appendChild(option);
+    });
+
+    // 📍 Leaflet Map Setup
+    let map;
+    const showMapBtn = document.getElementById("showMapBtn");
+    showMapBtn?.addEventListener("click", function () {
+        const lat = parseFloat(document.getElementById("latitude").value);
+        const lng = parseFloat(document.getElementById("longitude").value);
+
+        if (!isNaN(lat) && !isNaN(lng)) {
+            if (!map) {
+                map = L.map("map").setView([lat, lng], 10);
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+                }).addTo(map);
+            } else {
+                map.setView([lat, lng], 10);
+            }
+
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup(`Selected Location: [${lat.toFixed(2)}, ${lng.toFixed(2)}]`)
+                .openPopup();
+        } else {
+            alert("Please enter valid latitude and longitude.");
+        }
+    });
 });
+
+    
